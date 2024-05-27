@@ -1,124 +1,117 @@
-Challenge Personal Pay
+Weather API
 
-# Weather API
+This is an API for fetching weather data using Node.js(v16.9.1), Express, and Axios. It provides current weather data and weather forecasts based on the user's location or a specified city.
 
-Esta es una API para obtener datos del clima utilizando Node.js, Express, y Axios. Proporciona datos actuales del clima y previsiones meteorológicas basadas en la ubicación del usuario o una ciudad específica.
+Installation
 
-## Instalación
+Head over to "https://openweathermap.org/api/one-call-3", create an account, and snag yourself an API KEY.
 
-0. Ingrese a la siguiente URL "https://openweathermap.org/api/one-call-3", cree una cuenta y obtenga una API KEY.
+Clone this repository:
 
-1. Clona este repositorio:
+git clone <REPOSITORY_URL>
 
-   git clone <URL_DEL_REPOSITORIO>
+Navigate to the project directory:
 
-2. Navega al directorio del proyecto:
+cd backend
 
-   cd backend
+Install the dependencies:
 
-3. Instala las dependencias:
+npm install
 
-   npm install
+Create a .env file in the root of the project and add your environment variables:
 
-4. Crea un archivo `.env` en la raíz del proyecto y añade tus variables de entorno:
+PORT=3000
+NODE_ENV=development
+OPENWEATHER_API_KEY='your_api_key'
+BASE_OPENWEATHER_API_URL='https://api.openweathermap.org/data/3.0/onecall'
+IP_API_URL='http://ip-api.com/json/'
 
-   ```
-   PORT=3000
-   NODE_ENV=development
-   OPENWEATHER_API_KEY='tu_api_key'
-   BASE_OPENWEATHER_API_URL='https://api.openweathermap.org/data/3.0/onecall'
-   IP_API_URL='http://ip-api.com/json/'
-   ```
+Fire up the server:
 
-5. Inicia el servidor:
+npm app.js
 
-   npm app.js
+Usage
 
-## Uso
+You can use Postman or any other tool to make HTTP requests to the API.
 
-Puedes utilizar Postman o cualquier otra herramienta para hacer solicitudes HTTP a la API.
+Get User's Location
+URL: /api/v1/location
 
-### Obtener la ubicación del usuario
+Method: GET
 
-**URL:** `/api/v1/location`
+Successful Response:
 
-**Método:** `GET`
-
-**Respuesta exitosa:**
-
-```json
 {
   "city": "CityName",
   "lat": 51.509865,
   "lon": -0.118092
 }
 
-Obtener el clima actual
+Get Current Weather
 
 URL: /api/v1/current/:city?
 
-Método: GET
+Method: GET
 
-Parámetros de URL:
+URL Parameters:
 
-city (opcional): Coordenadas de la ciudad en formato lat,lon.
+city (optional): City coordinates in the format lat,lon.
 
-Ejemplo de solicitud:
+Request Example:
 
 GET /api/v1/current?city=51.509865,-0.118092
 
-Respuesta exitosa:
+Successful Response:
 
 {
   "weather": {...}
 }
 
-Obtener la previsión meteorológica
+Get Weather Forecast
 
 URL: /api/v1/forecast/:city?
 
-Método: GET
+Method: GET
 
-Parámetros de URL:
+URL Parameters:
 
-city (opcional): Coordenadas de la ciudad en formato lat,lon.
+city (optional): City coordinates in the format lat,lon.
 
-Parámetros de consulta:
+Query Parameters:
 
-count (opcional): Número de días para la previsión.
+count (optional): Number of days for the forecast.
 
-Ejemplo de solicitud:
+Request Example:
 
-GET /api/v1/forecast?count=5&city=51.509865,-0.118092
+GET /api
 
+/v1/forecast?count=5&city=51.509865,-0.118092
 
-Respuesta exitosa:
+Successful Response:
 
 {
   "list": [...]
 }
 
+Error Handling
 
-Manejo de errores
+If the request doesn't meet the validation schemas or if a server error occurs, you'll receive an error response:
 
-Si la solicitud no cumple con los esquemas de validación o si ocurre un error en el servidor, recibirás una respuesta de error:
-
-Respuesta de error:
+Error Response:
 
 {
   "message": "Error message"
 }
 
-Ejemplos de errores:
+Examples of Errors:
 
-400 Bad Request: Parámetros de entrada inválidos.
-500 Internal Server Error: Error del servidor.
+400 Bad Request: Invalid input parameters.
+500 Internal Server Error: Server error.
 
 Tests
 
-Para ejecutar los tests, utiliza el siguiente comando:
+To run the tests, use the following command:
 
 npm test
 
-Esto ejecutará los tests definidos en el proyecto para asegurar que la API funcione correctamente.
-```
+This will execute the tests defined in the project to ensure the API functions correctly.
