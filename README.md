@@ -1,4 +1,4 @@
-<h1 align="center">Weather Application Development Test</h1>
+<h1 align="center">Weather App</h1>
 
 Las tecnologías a utilizar son **NodeJS**, **ReactJS** o **React Native**. En el caso de preferir **React Native (RN)**, utilizarlo de manera nativa (sin expo).
 
