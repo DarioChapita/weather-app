@@ -1,117 +1,126 @@
-Weather API
+<h1 align="center">Weather API</h1>
 
-This is an API for fetching weather data using Node.js(v16.9.1), Express, and Axios. It provides current weather data and weather forecasts based on the user's location or a specified city.
+This is an API for fetching weather data using **Node.js (v16.9.1)**, **Express**, and **Axios**. It provides current weather data and weather forecasts based on the user's location or a specified city.
 
-Installation
+## Installation
 
-Head over to "https://openweathermap.org/api/one-call-3", create an account, and snag yourself an API KEY.
+1. Head over to [OpenWeather One Call API](https://openweathermap.org/api/one-call-3), create an account, and snag yourself an API KEY.
+2. Clone this repository:
 
-Clone this repository:
+    ```bash
+    git clone <REPOSITORY_URL>
+    ```
 
-git clone <REPOSITORY_URL>
+3. Navigate to the project directory:
 
-Navigate to the project directory:
+    ```bash
+    cd backend
+    ```
 
-cd backend
+4. Install the dependencies:
 
-Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-npm install
+5. Create a `.env` file in the root of the project and add your environment variables:
 
-Create a .env file in the root of the project and add your environment variables:
+    ```plaintext
+    PORT=3000
+    NODE_ENV=development
+    OPENWEATHER_API_KEY='your_api_key'
+    BASE_OPENWEATHER_API_URL='https://api.openweathermap.org/data/3.0/onecall'
+    IP_API_URL='http://ip-api.com/json/'
+    ```
 
-PORT=3000
-NODE_ENV=development
-OPENWEATHER_API_KEY='your_api_key'
-BASE_OPENWEATHER_API_URL='https://api.openweathermap.org/data/3.0/onecall'
-IP_API_URL='http://ip-api.com/json/'
+6. Fire up the server:
 
-Fire up the server:
+    ```bash
+    npm start
+    ```
 
-npm app.js
+## Usage
 
-Usage
+You can use **Postman** or any other tool to make HTTP requests to the API.
 
-You can use Postman or any other tool to make HTTP requests to the API.
+### Get User's Location
 
-Get User's Location
-URL: /api/v1/location
+- **URL:** `/api/v1/location`
+- **Method:** `GET`
 
-Method: GET
+#### Successful Response:
 
-Successful Response:
-
+```json
 {
   "city": "CityName",
   "lat": 51.509865,
   "lon": -0.118092
 }
+```
 
-Get Current Weather
+### Get Current Weather
 
-URL: /api/v1/current/:city?
+- **URL:** `/api/v1/current/:city?`
+- **Method:** `GET`
 
-Method: GET
+#### URL Parameters:
 
-URL Parameters:
+- **city:**(optional): `City coordinates in the format lat,lon.`
 
-city (optional): City coordinates in the format lat,lon.
+#### Request Example:
 
-Request Example:
+_ **GET: /api/v1/current?city=51.509865,-0.118092**
 
-GET /api/v1/current?city=51.509865,-0.118092
-
-Successful Response:
-
+#### Successful Response:
+```json
 {
   "weather": {...}
 }
+```
+### Get Weather Forecast
 
-Get Weather Forecast
+- **URL:** `/api/v1/forecast/:city?`
+- **Method:** `GET`
 
-URL: /api/v1/forecast/:city?
+#### Query Parameters:
 
-Method: GET
+- **city:**(optional): `City coordinates in the format lat,lon.`
 
-URL Parameters:
+- **count:**(optional): `Number of days for the forecast.`
 
-city (optional): City coordinates in the format lat,lon.
+#### Request Example:
 
-Query Parameters:
+_ **GET: /api/v1/forecast?count=5&city=51.509865,-0.118092**
 
-count (optional): Number of days for the forecast.
-
-Request Example:
-
-GET /api
-
-/v1/forecast?count=5&city=51.509865,-0.118092
-
-Successful Response:
-
+#### Successful Response:
+```json
 {
   "list": [...]
 }
+```
 
-Error Handling
+## Error Handling
 
 If the request doesn't meet the validation schemas or if a server error occurs, you'll receive an error response:
 
-Error Response:
+#### Error Response:
 
+```json
 {
   "message": "Error message"
 }
+```
 
-Examples of Errors:
+#### Examples of Errors:
 
-400 Bad Request: Invalid input parameters.
-500 Internal Server Error: Server error.
+- **400 Bad Request**: `Invalid input parameters.`
 
-Tests
+- **500 Internal Server Error**: `Server error.`
 
-To run the tests, use the following command:
+## Tests:
 
-npm test
+To run the tests, use the following command, this will execute the tests defined in the project to ensure the API functions correctly.
 
-This will execute the tests defined in the project to ensure the API functions correctly.
+ ```bash
+    npm test
+ ```
